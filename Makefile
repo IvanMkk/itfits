@@ -1,1 +1,1 @@
-import 
+include src/server/server.mk
