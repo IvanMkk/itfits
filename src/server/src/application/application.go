@@ -12,6 +12,11 @@ import (
 	_ "github.com/lib/pq"
 )
 
+const (
+	timeLayout = "2006-01-02 15:04:05"
+	timeLayoutPQ = "2006-01-02T15:04:05Z"
+)
+
 type App struct {
 	Port    string
 	DB      *sql.DB
@@ -33,11 +38,21 @@ func New() *App {
 		log.Fatalf("ERROR: DB connection lost. %s", err)
 	}
 
-	return &App{
+	app := &App{
 		Port:    os.Getenv("PORT"),
 		DB:      db,
 		Methods: gin.Default(),
 	}
+
+	app.Methods.NoRoute(func(c *gin.Context) {
+		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
+	})
+	app.Methods.POST("/v1/registration", app.RegistrationHandler)
+	app.Methods.GET("/v1/authentications", app.AuthenticationsHandler)
+
+	app.Methods.POST("/v1/item", app.AddItemHandler)
+
+	return app
 }
 
 func readEnv() {
@@ -63,13 +78,6 @@ func readEnv() {
 
 func (a *App) Start() {
 	a.Methods.Use(gin.Logger())
-
-	a.Methods.NoRoute(func(c *gin.Context) {
-		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
-	})
-
-	a.Methods.POST("/v1/registration", a.CreateAccount)
-	a.Methods.POST("/v1/authentications", a.AuthenticationsHandler)
 
 	a.Methods.Run(fmt.Sprintf("0.0.0.0:%v", a.Port))
 }

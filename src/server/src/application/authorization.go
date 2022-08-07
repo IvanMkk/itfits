@@ -9,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (a *App) CreateAccount(ctx *gin.Context) {
-	var req schema.CreateAccountRequest
+func (a *App) RegistrationHandler(ctx *gin.Context) {
+	var req schema.RegistrationRequest
 	if err := ctx.BindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": "Validation error",

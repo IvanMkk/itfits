@@ -1,1 +1,1 @@
-DROP TABLE authentication_tokens;
+DROP TABLE it_authentication_tokens;

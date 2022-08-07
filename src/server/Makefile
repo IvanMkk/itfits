@@ -13,3 +13,6 @@ server-migrate:
 		-path=/migrations/ \
 		-database $POSTGRES \
 		up
+
+server-test:
+	go test -v ./...
