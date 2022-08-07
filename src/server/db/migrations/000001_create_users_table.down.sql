@@ -1,2 +1,1 @@
-DROP TABLE users;
-
+DROP TABLE it_users;
