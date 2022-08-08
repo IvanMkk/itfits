@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    outline: 0;
+    outline: none;
+}
+
+body {
+    font-weight: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    text-align: left;
+    vertical-align: baseline;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    list-style-type: none;
+}
+
+button,
+input,
+textarea {
+    background: transparent;
+    /*Проверить достаточно ли этой записи чтобы сбросить все предустановленные телефонами и браузерами стили для форм*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input,
+textarea {
+    outline: none;
+    border: 0 none;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type=button],
+input[type=submit] {
+    border: none;
+    background-color: transparent;
+}
+
+[hidden] {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+input[type=button]:focus,
+input[type=submit]:focus {
+    outline: none;
+}
+
+::-webkit-input-placeholder {
+    color: black;
+    font-size: 100%;
+}
+
+::-moz-placeholder {
+    color: black;
+    font-size: 100%;
+}
+
+:-moz-placeholder {
+    color: black;
+    font-size: 100%;
+}
+
+:-ms-input-placeholder {
+    color: black;
+    font-size: 100%;
+}
+
+:focus::-webkit-input-placeholder {
+    color: transparent
+}
+
+:focus::-moz-placeholder {
+    color: transparent
+}
+
+:focus:-moz-placeholder {
+    color: transparent
+}
+
+:focus:-ms-input-placeholder {
+    color: transparent
+}
+
+sup {
+    vertical-align: super;
+    font-size: 0.6em
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.no-marg-padd {
+    margin: 0 !important;
+    padding: 0 !important;
+}
