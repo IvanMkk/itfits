@@ -15,7 +15,6 @@ type AddItem struct {
 	GarmentId      string `json:"garment_id"`
 	SizeTypeId     string `json:"size_type_id"`
 	SizeTypeItemId string `json:"size_type_item_id"`
-	ItemState      string `json:"item_state"`
 }
 
 type GetItem struct {
@@ -27,10 +26,6 @@ type GetItem struct {
 	ItemState      string `json:"item_state"`
 	DtimeCreated   string `json:"dtime_created"`
 	DtimeArchived  string `json:"dtime_archived"`
-}
-
-type DeleteItem struct {
-	Id string `json:"id"`
 }
 
 type Token struct {
