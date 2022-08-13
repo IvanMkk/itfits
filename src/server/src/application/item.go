@@ -2,6 +2,7 @@ package application
 
 import (
 	"crypto/rand"
+	"encoding/json"
 	"log"
 	schema "main/src/schemas"
 	"net/http"
@@ -107,11 +108,70 @@ func (a *App) DeleteItemHandler(ctx *gin.Context) {
 	defer stmt.Close()
 
 	_, err = stmt.Exec(id, user_id)
-
 	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Delete error",
+		})
+		log.Printf("ERROR: %v", err)
 		return
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "Success"})
+}
+
+func (a *App) ListItemsHandler(ctx *gin.Context) {
+	user_id, err := a.GetUserFromToken(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Authorization error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+
+	stmt, err := a.DB.Query(`SELECT * FROM it_wardrobe_item
+	WHERE user_id=$1 and item_state=$2;
+	`, user_id, "active")
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Get items error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+	defer stmt.Close()
+
+	items := []schema.GetItem{}
+	for stmt.Next() {
+		var item schema.GetItem
+		if err := stmt.Scan(
+			&item.Id,
+			&item.UserId,
+			&item.BrandName,
+			&item.GarmentId,
+			&item.SizeTypeId,
+			&item.SizeTypeItemId,
+			&item.ItemState,
+		); err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{
+				"error": "Get items error",
+			})
+			log.Printf("ERROR: %v", err)
+			return
+		}
+		items = append(items, item)
+	}
+
+	itemsJson, err := json.Marshal(items)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Get items error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+
+	}
+
+	ctx.JSON(http.StatusOK, itemsJson)
 }

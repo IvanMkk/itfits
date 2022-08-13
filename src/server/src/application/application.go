@@ -52,6 +52,7 @@ func New() *App {
 
 	app.Methods.POST("/v1/item", app.AddItemHandler)
 	app.Methods.DELETE("/v1/item/:id", app.DeleteItemHandler)
+	app.Methods.GET("/v1/item", app.ListItemsHandler)
 
 	return app
 }

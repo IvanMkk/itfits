@@ -15,7 +15,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func TestAddDeleteItemHandler(t *testing.T) {
+func TestAddDeleteListItemHandler(t *testing.T) {
 	bodyReader := strings.NewReader(`{"email": "12124", "password": "testinasg"}`)
 	req := httptest.NewRequest(http.MethodPost, "/v1/registration", bodyReader)
 	w := httptest.NewRecorder()
@@ -119,6 +119,22 @@ func TestAddDeleteItemHandler(t *testing.T) {
 		return
 	}
 	t.Logf("itemId.Id: %v\n", itemId.Id)
+
+	// List items
+	w = httptest.NewRecorder()
+	c, _ = gin.CreateTestContext(w)
+	bodyReader = strings.NewReader("")
+	c.Request = httptest.NewRequest(http.MethodGet, "/v1/item", bodyReader)
+	c.Request.Header.Add("Authorization", bearer)
+
+	app.ListItemsHandler(c)
+	res = w.Result()
+	if res.StatusCode != http.StatusOK {
+		t.Error("Can't list items")
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
+	}
 
 	w = httptest.NewRecorder()
 	c, _ = gin.CreateTestContext(w)
