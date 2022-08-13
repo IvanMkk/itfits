@@ -156,9 +156,6 @@ func (a App) GetUserFromToken(ctx *gin.Context) (user_id string, err error) {
 
 	token, err := a.GetToken(ctx)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, &gin.H{
-			"error": "Authorization error",
-		})
 		log.Printf("ERROR: %v", err)
 		return "", err
 	}
@@ -172,9 +169,6 @@ func (a App) GetUserFromToken(ctx *gin.Context) (user_id string, err error) {
 
 	userDetails, err = a.ValidateToken(token)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, &gin.H{
-			"error": "Authorization error",
-		})
 		log.Printf("ERROR: %v", err)
 		return "", err
 	}

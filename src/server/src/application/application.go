@@ -51,6 +51,7 @@ func New() *App {
 	app.Methods.GET("/v1/authentications", app.AuthenticationsHandler)
 
 	app.Methods.POST("/v1/item", app.AddItemHandler)
+	app.Methods.DELETE("/v1/item/:id", app.DeleteItemHandler)
 
 	return app
 }

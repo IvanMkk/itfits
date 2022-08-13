@@ -2,6 +2,7 @@ package application
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	schema "main/src/schemas"
 	"net/http"
@@ -14,7 +15,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func TestAddItemHandler(t *testing.T) {
+func TestAddDeleteItemHandler(t *testing.T) {
 	bodyReader := strings.NewReader(`{"email": "12124", "password": "testinasg"}`)
 	req := httptest.NewRequest(http.MethodPost, "/v1/registration", bodyReader)
 	w := httptest.NewRecorder()
@@ -70,7 +71,6 @@ func TestAddItemHandler(t *testing.T) {
 		GarmentId:      testUUID,
 		SizeTypeId:     testUUID,
 		SizeTypeItemId: testUUID,
-		ItemState:      "active",
 	}
 
 	bodyJson, err := json.Marshal(addItemRequest)
@@ -78,7 +78,7 @@ func TestAddItemHandler(t *testing.T) {
 	w = httptest.NewRecorder()
 	c, _ = gin.CreateTestContext(w)
 	bodyReader = strings.NewReader(string(bodyJson))
-	c.Request = httptest.NewRequest(http.MethodGet, "/v1/authentications", bodyReader)
+	c.Request = httptest.NewRequest(http.MethodGet, "/v1/item", bodyReader)
 
 	// add authorization header to the req
 	var bearer = "Bearer " + data.Token.AuthToken
@@ -89,6 +89,55 @@ func TestAddItemHandler(t *testing.T) {
 	res = w.Result()
 	if res.StatusCode != http.StatusOK {
 		t.Error("Can't add item")
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
+	}
+	responce, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		t.Errorf("responce read error: %v", err)
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
+	}
+
+	itemId := struct {
+		Id string `json:"id"`
+	}{}
+
+	if err = json.Unmarshal(responce, &itemId); err != nil {
+		t.Errorf("unexpected output after adding an item")
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
+	}
+
+	if itemId.Id == "" {
+		t.Error("unexpected item id")
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
+	}
+	t.Logf("itemId.Id: %v\n", itemId.Id)
+
+	w = httptest.NewRecorder()
+	c, _ = gin.CreateTestContext(w)
+	bodyReader = strings.NewReader(string(bodyJson))
+	c.Request = httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/item/%s", itemId.Id), bodyReader)
+	c.Request.Header.Add("Authorization", bearer)
+	c.Params = append(c.Params, gin.Param{
+		Key:   "id",
+		Value: itemId.Id,
+	})
+
+	app.DeleteItemHandler(c)
+
+	res = w.Result()
+	if res.StatusCode != http.StatusOK {
+		t.Error("Can't remove item")
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
 	}
 
 	app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
