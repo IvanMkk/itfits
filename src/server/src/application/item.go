@@ -2,7 +2,6 @@ package application
 
 import (
 	"crypto/rand"
-	"encoding/json"
 	"log"
 	schema "main/src/schemas"
 	"net/http"
@@ -163,15 +162,5 @@ func (a *App) ListItemsHandler(ctx *gin.Context) {
 		items = append(items, item)
 	}
 
-	itemsJson, err := json.Marshal(items)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"error": "Get items error",
-		})
-		log.Printf("ERROR: %v", err)
-		return
-
-	}
-
-	ctx.JSON(http.StatusOK, itemsJson)
+	ctx.JSON(http.StatusOK, items)
 }

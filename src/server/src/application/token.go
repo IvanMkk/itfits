@@ -5,8 +5,6 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"errors"
-	"log"
-	"net/http"
 	"strings"
 	"time"
 
@@ -138,11 +136,7 @@ func (a *App) GetToken(c *gin.Context) (token string, err error) {
 
 	// Split it into two parts - "Bearer" and token
 	parts := strings.SplitN(authorization, " ", 2)
-	if parts[0] != "Bearer" {
-		c.JSON(http.StatusBadRequest, &gin.H{
-			"error": "Invalid Authorization header",
-		})
-
+	if parts[0] != "Bearer" || len(parts) < 2 {
 		return "", errors.New("Invalid Authorization header")
 	}
 
@@ -156,7 +150,6 @@ func (a App) GetUserFromToken(ctx *gin.Context) (user_id string, err error) {
 
 	token, err := a.GetToken(ctx)
 	if err != nil {
-		log.Printf("ERROR: %v", err)
 		return "", err
 	}
 
@@ -169,7 +162,6 @@ func (a App) GetUserFromToken(ctx *gin.Context) (user_id string, err error) {
 
 	userDetails, err = a.ValidateToken(token)
 	if err != nil {
-		log.Printf("ERROR: %v", err)
 		return "", err
 	}
 

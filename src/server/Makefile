@@ -1,3 +1,5 @@
+.PHONY : server-run server-migration-create server-migrate server-test
+
 server-run:
 	go run src/server/main.go
 
@@ -11,7 +13,7 @@ server-migrate:
 	docker run -v /home/omega/Documents/itfits/src/server/db/migrations:/migrations \
 		--network host migrate/migrate \
 		-path=/migrations/ \
-		-database $POSTGRES \
+		-database ${POSTGRES} \
 		up
 
 server-test:
