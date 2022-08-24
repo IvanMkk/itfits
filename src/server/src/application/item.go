@@ -119,6 +119,51 @@ func (a *App) DeleteItemHandler(ctx *gin.Context) {
 		"message": "Success"})
 }
 
+func (a *App) GetItemHandler(ctx *gin.Context) {
+	user_id, err := a.GetUserFromToken(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Authorization error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+
+	id := ctx.Param("id")
+
+	stmt, err := a.DB.Query(`SELECT * FROM it_wardrobe_item
+	WHERE user_id=$1 and item_state=$2 and id=$3;
+	`, user_id, "active", id)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Get item error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+	defer stmt.Close()
+
+	var item schema.GetItem
+	stmt.Next()
+	if err := stmt.Scan(
+		&item.Id,
+		&item.UserId,
+		&item.BrandName,
+		&item.GarmentId,
+		&item.SizeTypeId,
+		&item.SizeTypeItemId,
+		&item.ItemState,
+	); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Get item error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, item)
+}
+
 func (a *App) ListItemsHandler(ctx *gin.Context) {
 	user_id, err := a.GetUserFromToken(ctx)
 	if err != nil {
