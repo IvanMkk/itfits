@@ -16,7 +16,7 @@ import (
 )
 
 func TestAddDeleteListItemHandler(t *testing.T) {
-	bodyReader := strings.NewReader(`{"email": "12124", "password": "testinasg"}`)
+	bodyReader := strings.NewReader(`{"email": "12124", "password": "testing"}`)
 	req := httptest.NewRequest(http.MethodPost, "/v1/registration", bodyReader)
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
@@ -39,7 +39,7 @@ func TestAddDeleteListItemHandler(t *testing.T) {
 
 	w = httptest.NewRecorder()
 	c, _ = gin.CreateTestContext(w)
-	bodyReader = strings.NewReader(`{"email": "12124", "password": "testinasg"}`)
+	bodyReader = strings.NewReader(`{"email": "12124", "password": "testing"}`)
 	c.Request = httptest.NewRequest(http.MethodGet, "/v1/authentications", bodyReader)
 
 	app.AuthenticationsHandler(c)
@@ -93,9 +93,9 @@ func TestAddDeleteListItemHandler(t *testing.T) {
 
 		return
 	}
-	responce, err := ioutil.ReadAll(res.Body)
+	response, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		t.Errorf("responce read error: %v", err)
+		t.Errorf("response read error: %v", err)
 		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
 
 		return
@@ -105,7 +105,7 @@ func TestAddDeleteListItemHandler(t *testing.T) {
 		Id string `json:"id"`
 	}{}
 
-	if err = json.Unmarshal(responce, &itemId); err != nil {
+	if err = json.Unmarshal(response, &itemId); err != nil {
 		t.Errorf("unexpected output after adding an item")
 		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
 
@@ -138,8 +138,26 @@ func TestAddDeleteListItemHandler(t *testing.T) {
 
 	w = httptest.NewRecorder()
 	c, _ = gin.CreateTestContext(w)
-	bodyReader = strings.NewReader(string(bodyJson))
-	c.Request = httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/item/%s", itemId.Id), bodyReader)
+	c.Request = httptest.NewRequest(http.MethodGet, fmt.Sprintf("/v1/item/%s", itemId.Id), nil)
+	c.Request.Header.Add("Authorization", bearer)
+	c.Params = append(c.Params, gin.Param{
+		Key:   "id",
+		Value: itemId.Id,
+	})
+
+	app.GetItemHandler(c)
+
+	res = w.Result()
+	if res.StatusCode != http.StatusOK {
+		t.Error("Can't get item")
+		app.DB.Exec(`DELETE FROM it_users WHERE email = '12124';`)
+
+		return
+	}
+	
+	w = httptest.NewRecorder()
+	c, _ = gin.CreateTestContext(w)
+	c.Request = httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/item/%s", itemId.Id), nil)
 	c.Request.Header.Add("Authorization", bearer)
 	c.Params = append(c.Params, gin.Param{
 		Key:   "id",
