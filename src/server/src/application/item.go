@@ -28,7 +28,7 @@ func (a *App) AddItemHandler(ctx *gin.Context) {
 		return
 	}
 
-	queryString := `insert into it_wardrobe_item(
+	queryString := `INSERT INTO it_wardrobe_item(
 		id, 
 		user_id,
 		brand_name,
@@ -36,7 +36,7 @@ func (a *App) AddItemHandler(ctx *gin.Context) {
 		size_type_id,
 		size_type_item_id,
 		item_state
-	) values ($1, $2, $3, $4, $5, $6, $7)`
+	) VALUES ($1, $2, $3, $4, $5, $6, $7)`
 	stmt, err := a.DB.Prepare(queryString)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -94,7 +94,7 @@ func (a *App) DeleteItemHandler(ctx *gin.Context) {
 
 	queryString := `UPDATE it_wardrobe_item
 	SET item_state='archived'
-	WHERE id=$1 and user_id=$2;
+	WHERE id=$1 AND user_id=$2;
 	`
 	stmt, err := a.DB.Prepare(queryString)
 	if err != nil {
@@ -208,4 +208,84 @@ func (a *App) ListItemsHandler(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, items)
+}
+
+func (a *App) EditItemHandler(ctx *gin.Context) {
+	var req schema.AddItem
+	if err := ctx.BindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Validation error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+
+	user_id, err := a.GetUserFromToken(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Authorization error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+
+	id := ctx.Param("id")
+
+	stmt, err := a.DB.Query(`SELECT * FROM it_wardrobe_item
+	WHERE user_id=$1 AND item_state=$2 AND id=$3;
+	`, user_id, "active", id)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Get item error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+	defer stmt.Close()
+
+	var item schema.GetItem
+	stmt.Next()
+	if err := stmt.Scan(
+		&item.Id,
+		&item.UserId,
+		&item.BrandName,
+		&item.GarmentId,
+		&item.SizeTypeId,
+		&item.SizeTypeItemId,
+		&item.ItemState,
+	); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Get item error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+
+	stmt, err = a.DB.Query(`
+	UPDATE 
+		it_wardrobe_item 
+	SET
+		brand_name=$1,
+		garment_id=$2,
+		size_type_id=$3,
+		size_type_item_id=$4
+	WHERE id=$5`,
+		req.BrandName,
+		req.GarmentId,
+		req.SizeTypeId,
+		req.SizeTypeItemId,
+		id)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Update item error",
+		})
+		log.Printf("ERROR: %v", err)
+		return
+	}
+	defer stmt.Close()
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Success",
+		"item_id": id,
+	})
 }

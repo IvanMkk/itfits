@@ -54,6 +54,7 @@ func New() *App {
 	app.Methods.DELETE("/v1/item/:id", app.DeleteItemHandler)
 	app.Methods.GET("/v1/item", app.ListItemsHandler)
 	app.Methods.GET("/v1/item/:id", app.GetItemHandler)
+	app.Methods.PUT("/v1/item/:id", app.EditItemHandler)
 
 	return app
 }
