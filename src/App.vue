@@ -1,25 +1,39 @@
 <template>
-<TheHeader />
-<TheContent />
-<TheFooter />
+  <h1>Hello there</h1>
+  <SignUp />
+  <!--SignIn />
+  <ForgotPassword />
+  <RestorePassword />
+  <IndexPage /-->
 </template>
 
 <script>
-import TheHeader from './components/TheHeader.vue'
-import TheContent from './components/TheContent.vue'
-import TheFooter from './components/TheFooter.vue'
+import SignUp from './components/SignUp.vue'
+/*import SignIn from './components/SignIn.vue'
+import ForgotPassword from './components/ForgotPassword.vue'
+import RestorePassword from './components/RestorePassword.vue'
+import IndexPage from './components/IndexPage.vue'*/
 
 export default {
   name: 'App',
+
   components: {
-    TheHeader,
-    TheContent,
-    TheFooter
+    SignUp/*,
+    SignIn,
+    ForgotPassword,
+    RestorePassword,
+    IndexPage*/
   }
 }
 </script>
 
-<style lang="less">
-  @import '@/assets/css/clean.css';
-  @import '@/assets/css/style.less';
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>
