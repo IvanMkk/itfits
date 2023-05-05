@@ -1,6 +1,5 @@
 <template>
     <h1>Sign Up</h1>
-    <!--form action="" class="form"-->
         <div class="form__group">
             <input type="text" v-model="email" id="email" name="email" class="form__control" placeholder="Email">
             <label for="email" class="form__label none">Email</label>
@@ -10,17 +9,6 @@
             <label for="password" class="form__label none">Password</label>
         </div>
         <button v-on:click="signUp" class="" id="sign-up">Sign Up</button>
-    <!--/form-->
-    <!--div>
-        <form @‌submit.prevent="onSubmit">
-            <label>Email:</label>
-            <input type="email" v-model="email">
-            <label>Password:</label>
-            <input type="password" v-model="password">
-            <button type="submit">Sign Up</button>
-            <router-link to="/sign-in">Already have an account?</router-link>
-        </form>
-    </div-->
 </template>
 
 <script>
@@ -50,12 +38,5 @@ export default {
             }
         }
     }
-
-    /*methods: {
-        onSubmit() {
-            this.$store.dispatch('signUp', { email: this.email, password: this.password })
-            this.$router.push('/')
-        },
-    },*/
 }
 </script>
