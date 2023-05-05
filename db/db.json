@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "usfame@gmail.com",
+      "password": "admin321"
+    },
+    {
+      "email": "usfame2@gmail.com",
+      "password": "admin3214",
+      "id": 2
+    },
+    {
+      "email": "qwee3",
+      "password": "34534645",
+      "id": 3
+    },
+    {
+      "email": "asder",
+      "password": "1234r5t678",
+      "id": 4
+    }
+  ]
+}
