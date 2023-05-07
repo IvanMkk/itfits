@@ -19,6 +19,16 @@
       "email": "asder",
       "password": "1234r5t678",
       "id": 4
+    },
+    {
+      "email": "igopro@list.ru",
+      "password": "qswdefr355",
+      "id": 5
+    },
+    {
+      "email": "bat@man.ru",
+      "password": "ghj",
+      "id": 6
     }
   ]
 }

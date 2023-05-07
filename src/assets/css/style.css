@@ -1,0 +1,51 @@
+@import '/src/assets/css/clean.css';
+@import '/src/assets/css/constants.css';
+
+html {
+  font-size: 8px;
+}
+* {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2.125rem;
+  line-height: 2.5rem;
+}
+#app {
+  width: 41.875rem;
+  margin: 0 auto;
+}
+h1 {
+  font: normal normal bold 4.25rem/4.875rem 'Ubuntu';
+}
+button {
+  width: 100%;
+  text-align: center;
+  padding: 1.75rem auto;
+}
+.tag {
+  width: fit-content;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #417B80;
+  border: 1px solid #417B80;
+}
+.tag:hover {
+  color: #FFFFFF;
+  background-color: #417B80;
+}
+.tag-active {
+  color: #FFFFFF;
+  background-color: #417B80;
+}
+.wardrobeItem {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  margin: 0 -1rem;
+}
+.wardrobeItem:hover {
+  background-color: rgba(65, 123, 128, 0.15);
+}
+.wardrobeItem-active {
+  background-color: rgba(65, 123, 128, 0.15);
+}
