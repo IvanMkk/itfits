@@ -1,10 +1,11 @@
 <template>
     <header>
         <nav>
-            <a href="#">Log In</a>
+            <a href=""><router-link to="/account">Account</router-link></a>
+            <a href=""><router-link to="/login">Log In</router-link></a>
             <a v-on:click="signout()" href="#">Sign Out</a>
-            <a href="#">Trash</a>
-            <a href="#">Wardrobe</a>
+            <a href=""><router-link to="/bin">Trash</router-link></a>
+            <a href=""><router-link to="/">Wardrobe</router-link></a>
         </nav>
     </header>
     <h1>Header</h1>

@@ -30,5 +30,123 @@
       "password": "ghj",
       "id": 6
     }
+  ],
+  "it_garment_size_type": [
+    {
+      "id": 1,
+      "garment_type_id": 1,
+      "name": "INT",
+      "order_rank": 1
+    },
+    {
+      "id": 2,
+      "garment_type_id": 1,
+      "name": "US/UK",
+      "order_rank": 2
+    },
+    {
+      "id": 3,
+      "garment_type_id": 1,
+      "name": "EU",
+      "order_rank": 3
+    },
+    {
+      "id": 4,
+      "garment_type_id": 1,
+      "name": "ITL",
+      "order_rank": 4
+    },
+    {
+      "id": 5,
+      "garment_type_id": 1,
+      "name": "RUS",
+      "order_rank": 5
+    },
+    {
+      "id": 6,
+      "garment_type_id": 1,
+      "name": "cm",
+      "order_rank": 6
+    }
+  ],
+
+  "it_garment_size_type_item": [
+    {
+      "id": 1,
+      "size_type_id": 1,
+      "name": "XS",
+      "order_rank": 1
+    },
+    {
+      "id": 2,
+      "size_type_id": 1,
+      "name": "S",
+      "order_rank": 2
+    },
+    {
+      "id": 3,
+      "size_type_id": 1,
+      "name": "M",
+      "order_rank": 3
+    },
+    {
+      "id": 4,
+      "size_type_id": 1,
+      "name": "L",
+      "order_rank": 4
+    },
+    {
+      "id": 5,
+      "size_type_id": 1,
+      "name": "XL",
+      "order_rank": 5
+    },
+    {
+      "id": 6,
+      "size_type_id": 1,
+      "name": "XXL",
+      "order_rank": 6
+    },
+    {
+      "id": 7,
+      "size_type_id": 1,
+      "name": "XXXL",
+      "order_rank": 7
+    }
+  ],
+  "it_wardrobe_item": [
+    {
+      "id": 1,
+      "brand_name": "Lacoste",
+      "item_type": "Coat",
+      "garment_id": 1,
+      "size_type_id": 1,
+      "size_type_item_id": 4,
+      "item_state": "",
+      "dtime_created": "",
+      "dtime_archived": ""
+    },
+    {
+      "id": 2,
+      "brand_name": "Levi's",
+      "item_type": "Denim",
+      "garment_id": 2,
+      "size_type_id": 1,
+      "size_type_item_id": 4,
+      "item_state": "",
+      "dtime_created": "",
+      "dtime_archived": ""
+    },
+    {
+      "id": 3,
+      "brand_name": "Mustang",
+      "item_type": "Leather",
+      "garment_id": 3,
+      "size_type_id": 1,
+      "size_type_item_id": 3,
+      "item_state": "",
+      "dtime_created": "",
+      "dtime_archived": ""
+    }
   ]
 }

@@ -1,19 +1,13 @@
 <template>
     <TheHeader />
     <main>
-        <h1>{{email}} page</h1>
+        <h1>Account</h1>
     </main>
 </template>
 <script>
 import TheHeader from './TheHeader.vue'
 export default {
-    name: 'TheHome',
-
-    data() {
-        return {
-            email:''
-        }
-    },
+    name: 'UserAccount',
 
     components: {
         TheHeader
@@ -21,7 +15,6 @@ export default {
 
     mounted() {
         let user = localStorage.getItem('user-info')
-        this.email = JSON.parse(user).email
         if(!user) {
             this.$router.push({name:'SignUp'})
         }
