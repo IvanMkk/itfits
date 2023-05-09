@@ -69,7 +69,6 @@
       "order_rank": 6
     }
   ],
-
   "it_garment_size_type_item": [
     {
       "id": 1,
@@ -153,6 +152,48 @@
       "item_state": "",
       "dtime_created": "",
       "dtime_archived": ""
+    },
+    {
+      "item_type": "Bomber",
+      "brand_name": "AlphaIndustries",
+      "size": "M",
+      "id": 4
+    },
+    {
+      "item_type": "Bomber",
+      "brand_name": "AlphaIndustries",
+      "size": "XL",
+      "id": 5
+    },
+    {
+      "item_type": "Jeans",
+      "brand_name": "H&M",
+      "size": "XXL",
+      "id": 6
+    },
+    {
+      "item_type": "WinterCoat",
+      "brand_name": "Zara",
+      "size": "XS",
+      "id": 7
+    },
+    {
+      "item_type": "Bomber",
+      "brand_name": "Zara",
+      "size": "M",
+      "id": 8
+    },
+    {
+      "item_type": "WinterCoat",
+      "brand_name": "AlphaIndustries",
+      "size": "XXL",
+      "id": 9
+    },
+    {
+      "item_type": "WinterCoat",
+      "brand_name": "Bershka",
+      "size": "44",
+      "id": 10
     }
   ]
 }
