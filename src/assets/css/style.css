@@ -1,6 +1,18 @@
 @import 'clean.css';
+@font-face {
+  font-family: "UbuntuRegular";
+  src: url("/src/frontend/fonts/UbuntuRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "UbuntuBold";
+  src: url("/src/frontend/fonts/UbuntuBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
 * {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'UbuntuRegular', sans-serif;
   box-sizing: border-box;
   color: #000010;
   margin: 0;
@@ -11,16 +23,16 @@
   margin: 0 auto;
 }
 h1 {
-  font: normal normal bold 2.125rem/2.4375rem 'Ubuntu' sans-serif;
+  font: normal normal bold 2.125rem/2.4375rem 'UbuntuBold';
   margin-bottom: 1rem;
 }
 p {
-  font: normal normal normal 1.0625rem/1.25rem 'Ubuntu' sans-serif;
+  font: normal normal normal 1.0625rem/1.25rem 'UbuntuRegular';
   margin-right: 1.0625rem;
 }
 .sizes p {
   color: #8A8A8E;
-  font: normal normal normal 0.75rem/0.875rem 'Ubuntu' sans-serif;
+  font: normal normal normal 0.75rem/0.875rem 'UbuntuRegular';
   margin-right: 0.875rem;
 }
 a {
