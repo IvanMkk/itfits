@@ -19,6 +19,191 @@
       "email": "asder",
       "password": "1234r5t678",
       "id": 4
+    },
+    {
+      "email": "igopro@list.ru",
+      "password": "qswdefr355",
+      "id": 5
+    },
+    {
+      "email": "bat@man.ru",
+      "password": "ghj",
+      "id": 6
+    },
+    {
+      "email": "my@mail.com",
+      "password": "11223344",
+      "id": 7
+    },
+    {
+      "email": "me@mail.com",
+      "password": "kkjjhh",
+      "id": 8
+    }
+  ],
+  "it_garment_size_type": [
+    {
+      "id": 1,
+      "garment_type_id": 1,
+      "name": "INT",
+      "order_rank": 1
+    },
+    {
+      "id": 2,
+      "garment_type_id": 1,
+      "name": "US/UK",
+      "order_rank": 2
+    },
+    {
+      "id": 3,
+      "garment_type_id": 1,
+      "name": "EU",
+      "order_rank": 3
+    },
+    {
+      "id": 4,
+      "garment_type_id": 1,
+      "name": "ITL",
+      "order_rank": 4
+    },
+    {
+      "id": 5,
+      "garment_type_id": 1,
+      "name": "RUS",
+      "order_rank": 5
+    },
+    {
+      "id": 6,
+      "garment_type_id": 1,
+      "name": "cm",
+      "order_rank": 6
+    }
+  ],
+  "it_garment_size_type_item": [
+    {
+      "id": 1,
+      "size_type_id": 1,
+      "name": "XS",
+      "order_rank": 1
+    },
+    {
+      "id": 2,
+      "size_type_id": 1,
+      "name": "S",
+      "order_rank": 2
+    },
+    {
+      "id": 3,
+      "size_type_id": 1,
+      "name": "M",
+      "order_rank": 3
+    },
+    {
+      "id": 4,
+      "size_type_id": 1,
+      "name": "L",
+      "order_rank": 4
+    },
+    {
+      "id": 5,
+      "size_type_id": 1,
+      "name": "XL",
+      "order_rank": 5
+    },
+    {
+      "id": 6,
+      "size_type_id": 1,
+      "name": "XXL",
+      "order_rank": 6
+    },
+    {
+      "id": 7,
+      "size_type_id": 1,
+      "name": "XXXL",
+      "order_rank": 7
+    }
+  ],
+  "it_wardrobe_item": [
+    {
+      "id": 1,
+      "brand_name": "Lacoste",
+      "item_type": "Coat",
+      "garment_id": 1,
+      "size_type_id": 1,
+      "size_type": "INT",
+      "size": "L",
+      "size_type_item_id": 4,
+      "item_state": "",
+      "dtime_created": "",
+      "dtime_archived": ""
+    },
+    {
+      "id": 2,
+      "brand_name": "Levi's",
+      "item_type": "Denim",
+      "garment_id": 2,
+      "size_type_id": 1,
+      "size_type": "INT",
+      "size": "L",
+      "size_type_item_id": 4,
+      "item_state": "",
+      "dtime_created": "",
+      "dtime_archived": ""
+    },
+    {
+      "id": 3,
+      "brand_name": "Mustang",
+      "item_type": "Leather",
+      "garment_id": 3,
+      "size_type_id": 1,
+      "size_type": "INT",
+      "size": "M",
+      "size_type_item_id": 3,
+      "item_state": "",
+      "dtime_created": "",
+      "dtime_archived": ""
+    },
+    {
+      "item_type": "Bomber",
+      "brand_name": "AlphaIndustries",
+      "size": "M",
+      "id": 4
+    },
+    {
+      "item_type": "Bomber",
+      "brand_name": "AlphaIndustries",
+      "size": "XL",
+      "id": 5
+    },
+    {
+      "item_type": "Jeans",
+      "brand_name": "H&M",
+      "size": "XXL",
+      "id": 6
+    },
+    {
+      "item_type": "WinterCoat",
+      "brand_name": "Zara",
+      "size": "XS",
+      "id": 7
+    },
+    {
+      "item_type": "Bomber",
+      "brand_name": "Zara",
+      "size": "M",
+      "id": 8
+    },
+    {
+      "item_type": "WinterCoat",
+      "brand_name": "AlphaIndustries",
+      "size": "XXL",
+      "id": 9
+    },
+    {
+      "item_type": "WinterCoat",
+      "brand_name": "Bershka",
+      "size": "44",
+      "id": 10
     }
   ]
 }
