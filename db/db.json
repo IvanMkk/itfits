@@ -29,6 +29,16 @@
       "email": "bat@man.ru",
       "password": "ghj",
       "id": 6
+    },
+    {
+      "email": "my@mail.com",
+      "password": "11223344",
+      "id": 7
+    },
+    {
+      "email": "me@mail.com",
+      "password": "kkjjhh",
+      "id": 8
     }
   ],
   "it_garment_size_type": [

@@ -1,8 +1,8 @@
-import TheHome from './components/TheHome.vue'
-import SignUp from './components/SignUp.vue'
-import TheLogin from './components/TheLogin.vue'
-import UserAccount from './components/UserAccount.vue'
-import RecycleBin from './components/RecycleBin.vue'
+import TheHome from '@/frontend/components/TheHome.vue'
+import SignUp from '@/frontend/components/SignUp.vue'
+import TheLogin from '@/frontend/components/TheLogin.vue'
+import UserAccount from '@/frontend/components/UserAccount.vue'
+import RecycleBin from '@/frontend/components/RecycleBin.vue'
 import {createRouter, createWebHistory} from 'vue-router'
 
 const routes = [

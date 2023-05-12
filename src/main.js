@@ -1,7 +1,8 @@
-import '@/assets/css/style.css'
+import '@/frontend/assets/css/style.css'
+//import '@/assets/css/style.css'
 import { createApp } from 'vue'
-import router from './routers'
-import App from './App.vue'
+import router from '@/frontend/routers'
+import App from '@/frontend/App.vue'
 
 /*import router from '/routers'*/
 

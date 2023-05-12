@@ -1,6 +1,6 @@
 <template>
     <TheHeader />
-    <h1>Login</h1>
+    <h1>Sign Up</h1>
     <form class="form">
         <div class="form__group">
             <input type="text" v-model="email" id="email" name="email" class="form__control" placeholder="Email">
@@ -10,41 +10,50 @@
             <input type="password" v-model="password" id="password" name="password" class="form__control" placeholder="Password">
             <label for="password" class="form__label none">Password</label>
         </div>
-        <button v-on:click="login" class="" id="login">Login</button>
+        <button v-on:click="signUp" class="" id="sign-up">Sign Up</button>
     </form>
-    <a href=""><router-link to="/signup">Sign Up</router-link></a>
+    <a href=""><router-link to="/login">Login</router-link></a>
 </template>
 
 <script>
     import TheHeader from './TheHeader.vue'
     import axios from 'axios'
     export default {
-        name: 'TheLogin',
-        
+        name: 'SignUp',
+
         components: {
             TheHeader
         },
-        
+
         data() {
             return {
                 email: '',
-                password: ''
+                password: '',
             }
         },
 
         methods: {
-            async login() {
-                let result = await axios.get(`http://localhost:3000/users?email=${this.email}&password=${this.password}`)
+            async signUp() {
+                let result = await axios.post("http://localhost:3000/users", {
+                    email:this.email,
+                    password:this.password
+                })
+
                 console.log(result)
-            
-                if(result.status == 200 && result.data.length > 0) {
-                    localStorage.setItem("user-info", JSON.stringify(result.data[0]))
+
+                if(result.status == 201) {
+                    localStorage.setItem("user-info", JSON.stringify(result.data))
                     this.$router.push({name:'TheHome'})
                 }
             }
         },
 
         mounted() {
+            let user = localStorage.getItem('user-info')
+            if(user) {
+                this.$router.push({name:'TheHome'})
+            }
+
             /*const btnAddGarment = document.querySelector('#btn-new')
             const radioContainer = document.querySelector('.radio-container')
             const radioDetails = document.querySelectorAll('.radio-details')*/
@@ -54,11 +63,6 @@
             const btnCncl = document.querySelector('#btn-cancel')
             /*const divItem = Array.from(document.querySelectorAll('.item p'));
             const divSizes = Array.from(document.querySelectorAll('.sizes p'));*/
-
-            let user = localStorage.getItem('user-info')
-            if(user) {
-                this.$router.push({name:'TheHome'})
-            }
 
             window.addEventListener('DOMContentLoaded', () => {
                 const forms = document.querySelectorAll('.form')

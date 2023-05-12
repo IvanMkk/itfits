@@ -8,7 +8,6 @@
             <a href=""><router-link to="/">Wardrobe</router-link></a>
         </nav>
     </header>
-    <h1>Header</h1>
 </template>
 
 <script>
