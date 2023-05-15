@@ -1,12 +1,12 @@
 @font-face {
   font-family: "UbuntuRegular";
-  src: url("/src/frontend/assets/fonts/UbuntuRegular.ttf") format("truetype");
+  src: url("/src/assets/fonts/UbuntuRegular.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "UbuntuBold";
-  src: url("/src/frontend/assets/fonts/UbuntuBold.ttf") format("truetype");
+  src: url("/src/assets/fonts/UbuntuBold.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
