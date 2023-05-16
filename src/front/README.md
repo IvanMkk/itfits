@@ -1,4 +1,4 @@
-# itfits
+# front
 
 ## Project setup
 ```
