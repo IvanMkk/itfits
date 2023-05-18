@@ -31,17 +31,16 @@
                 password: '',
             }
         },
-
         methods: {
             async signUp() {
-                let result = await axios.post("http://localhost:3000/users", {
+                let result = await axios.post('http://0.0.0.0:3000/v1/users', {
                     email:this.email,
                     password:this.password
                 })
 
                 console.log(result)
 
-                if(result.status == 201) {
+                if(result.status == 200) {
                     localStorage.setItem("user-info", JSON.stringify(result.data))
                     this.$router.push({name:'TheHome'})
                 }
@@ -97,7 +96,7 @@
                             }
                         })
                     }
-                }	
+                }
             })
         }
     }

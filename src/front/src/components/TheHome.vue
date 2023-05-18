@@ -60,7 +60,7 @@ export default {
 
     methods: {
         async addWardrobeItem() {
-            const result = await axios.post("http://localhost:3000/it_wardrobe_item", {
+            const result = await axios.post("http://0.0.0.0:3000/v1/it_wardrobe_item", {
                 item_type:this.wardrobe_item.item_type,
                 brand_name:this.wardrobe_item.brand_name,
                 size:this.wardrobe_item.size
@@ -77,14 +77,14 @@ export default {
 
     async mounted() {
         let user = localStorage.getItem('user-info')
-        
+
         if(!user) {
             this.$router.push({name:'SignUp'})
         }
 
-        let result = await axios.get("http://localhost:3000/it_wardrobe_item")
-        let sizeType = await axios.get("http://localhost:3000/it_garment_size_type")
-        let sizes = await axios.get("http://localhost:3000/it_garment_size_type_item")
+        let result = await axios.get("http://0.0.0.0:3000/v1/it_wardrobe_item")
+        let sizeType = await axios.get("http://0.0.0.0:3000/v1/it_garment_size_type")
+        let sizes = await axios.get("http://0.0.0.0:3000/v1/it_garment_size_type_item")
         this.email = JSON.parse(user).email
         this.it_wardrobe_item = result.data
         this.it_garment_size_type = sizeType.data

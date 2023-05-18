@@ -1,11 +1,9 @@
 FROM node:18.16.0
 
-WORKDIR /app
-
 COPY package*.json ./
 
 RUN npm install
-COPY ./ .
+COPY . .
 RUN npm run build
 RUN npm install -g serve
 EXPOSE 8080
