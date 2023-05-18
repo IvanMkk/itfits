@@ -1,0 +1,39 @@
+services:
+  postgres_db:
+    image: postgres:14.4-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/pgdata
+      - POSTGRES_DB=itfits_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+  migrations:
+    image: migrate/migrate
+    volumes:
+      - ./server/db/migrations:/migrations
+    command: -path=/migrations/ -database 'postgres://postgres:postgres@postgres_db:5432/itfits_db?sslmode=disable' up
+    depends_on:
+      - postgres_db
+  server:
+    build: ./server
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000
+      - POSTGRES=postgres://postgres:postgres@postgres_db:5432/itfits_db?sslmode=disable
+    depends_on:
+      - postgres_db
+  front:
+    build: ./front
+    ports:
+      - 8080:8080
+    environment:
+      - BACKEND_URL=http://server:3000/v1
+    depends_on:
+      - server
+volumes:
+  db:
+    driver: local

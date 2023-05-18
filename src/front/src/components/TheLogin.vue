@@ -20,11 +20,11 @@
     import axios from 'axios'
     export default {
         name: 'TheLogin',
-        
+
         components: {
             TheHeader
         },
-        
+
         data() {
             return {
                 email: '',
@@ -34,9 +34,9 @@
 
         methods: {
             async login() {
-                let result = await axios.get(`http://localhost:3000/users?email=${this.email}&password=${this.password}`)
+                let result = await axios.get(`http://0.0.0.0:3000/v1/users?email=${this.email}&password=${this.password}`)
                 console.log(result)
-            
+
                 if(result.status == 200 && result.data.length > 0) {
                     localStorage.setItem("user-info", JSON.stringify(result.data[0]))
                     this.$router.push({name:'TheHome'})
@@ -93,10 +93,8 @@
                             }
                         })
                     }
-                }	
+                }
             })
-
-            
         }
     }
 </script>
