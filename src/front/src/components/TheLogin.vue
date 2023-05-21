@@ -37,7 +37,7 @@
                 let result = await axios.get(`http://0.0.0.0:3000/v1/users?email=${this.email}&password=${this.password}`)
                 console.log(result)
 
-                if(result.status == 200 && result.data.length > 0) {
+                if(result.status == 201 && result.data.length > 0) {
                     localStorage.setItem("user-info", JSON.stringify(result.data[0]))
                     this.$router.push({name:'TheHome'})
                 }
@@ -53,14 +53,14 @@
             /*const btnAddGarment = document.querySelector('#btn-new')
             const radioContainer = document.querySelector('.radio-container')
             const radioDetails = document.querySelectorAll('.radio-details')*/
-            const inputBrand = document.querySelector('#brand')
+            /*const inputBrand = document.querySelector('#brand')
             const inputType = document.querySelector('#type')
             const btnAdd = document.querySelector('#btn-add')
-            const btnCncl = document.querySelector('#btn-cancel')
+            const btnCncl = document.querySelector('#btn-cancel')*/
             /*const divItem = Array.from(document.querySelectorAll('.item p'));
             const divSizes = Array.from(document.querySelectorAll('.sizes p'));*/
 
-            window.addEventListener('DOMContentLoaded', () => {
+            /*window.addEventListener('DOMContentLoaded', () => {
                 const forms = document.querySelectorAll('.form')
 
                 for (const form of forms) {
@@ -94,7 +94,7 @@
                         })
                     }
                 }
-            })
+            })*/
         }
     }
 </script>

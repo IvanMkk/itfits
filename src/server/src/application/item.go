@@ -73,11 +73,27 @@ func (a *App) AddItemHandler(ctx *gin.Context) {
 		log.Printf("ERROR: %v", err)
 		return
 	}
+	
+	ctx.Header("Access-Control-Allow-Origin", "*")
+	ctx.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	ctx.Header("Access-Control-Allow-Headers", "Authorization, Content-Type")
+	ctx.Header("Access-Control-Allow-Credentials", "true")
+	ctx.Set("Content-Type", "application/json")
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"id":      id,
 	})
+
+	/*ctx.JSON(http.StatusOK, gin.H{
+		"message": "Success",
+		"id":      id,
+		"Access-Control-Request-Method":  ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+		"Access-Control-Request-Headers": ['*'],
+		"Access-Control-Allow-Credentials": true,
+        "Access-Control-Max-Age": 86400,
+        "Access-Control-Expose-Headers": [],
+	})*/
 }
 
 func (a *App) DeleteItemHandler(ctx *gin.Context) {
