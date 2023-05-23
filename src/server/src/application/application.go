@@ -44,6 +44,14 @@ func New() *App {
 		Methods: gin.Default(),
 	}
 
+	app.Methods.Use(func(ctx *gin.Context) {
+		ctx.Header("Access-Control-Allow-Origin", "*")
+		ctx.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		ctx.Header("Access-Control-Allow-Headers", "Authorization, Content-Type")
+		ctx.Header("Access-Control-Allow-Credentials", "true")
+		ctx.Next()
+	})
+
 	app.Methods.NoRoute(func(c *gin.Context) {
 		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
 	})
