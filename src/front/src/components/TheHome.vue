@@ -72,7 +72,7 @@ export default {
     },
 
     async mounted() {
-        let user = localStorage.getItem('user-info')
+        let user = localStorage.getItem('user')
 
         if(!user) {
             this.$router.push({name:'SignUp'})

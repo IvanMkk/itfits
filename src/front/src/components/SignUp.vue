@@ -34,34 +34,20 @@
         },
 
         methods: {
-            async signUp() {
-                /*try {
-                    const response = await axios.post('http://0.0.0.0:3000/v1/users', {
-                        email: this.email,
-                        password: this.password,
-                    });
-                    if (response.status === 200) {
-                        localStorage.setItem('user', JSON.stringify(response.data));
-                        this.$router.push('/TheHome');
-                    }
-                } catch (error) {
-                    console.error(error);
-                }*/
-                
-                let result = axios.post('http://0.0.0.0:3000/v1/users', {
+            async signUp() {                
+                let result = await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
                     email: this.email,
                     password: this.password
                 })
 
-                //alert(result)
+                alert(result)
+                alert(JSON.stringify(result.data))
 
-                if(result.status !== 200) {
-                    console.log(JSON.stringify(result.data))
-                    //localStorage.setItem("user-info", )
-                    //this.$router.push({name:'TheHome'})
-                    return
+                if(result.status === 200) {
+                    localStorage.setItem("user", JSON.stringify(result.data))
+                    this.$router.push({name:'TheHome'})
                 }
-
+/*
                 result = axios.get('http://0.0.0.0:3000/v1/users', {
                     email: this.email,
                     password: this.password
@@ -69,11 +55,11 @@
 
                 if(result.status !== 200) {
                     console.log(JSON.stringify(result.data))
-                    //this.$router.push({name:'TheHome'})
+                    
                     return
-                }
+                }*/
 
-                localStorage.setItem("user-info", JSON.stringify(result.data))
+                //localStorage.setItem("user-info", JSON.stringify(result.data))
             }
         },
 
@@ -83,10 +69,10 @@
             if (user) {
                 this.$router.push('/TheHome');
             }*/
-            /*let user = localStorage.getItem('user-info')
+            let user = localStorage.getItem('user')
             if(user) {
                 this.$router.push({name:'TheHome'})
-            }*/
+            }
 
             /*const btnAddGarment = document.querySelector('#btn-new')
             const radioContainer = document.querySelector('.radio-container')

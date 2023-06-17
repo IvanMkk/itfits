@@ -10,7 +10,8 @@
             <input type="password" v-model="password" id="password" name="password" class="form__control" placeholder="Password">
             <label for="password" class="form__label none">Password</label>
         </div>
-        <button v-on:click="login" class="" id="login">Login</button>
+        <button type="submit" @click.prevent="login">Login</button>
+        <!--button v-on:click="login" class="" id="login">Login</button-->
     </form>
     <a href=""><router-link to="/signup">Sign Up</router-link></a>
 </template>
@@ -27,28 +28,45 @@
 
         data() {
             return {
-                email: '',
-                password: ''
+                userData: {
+                    email: '', //embisda
+                    password: '' //embisda
+                }
             }
         },
 
         methods: {
             async login() {
+                /*const data = {
+                    email: this.email,
+                    password: this.password,
+                }*/
+                await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, this.userData)
+                    .then(response => {
+                        response.userData,
+                        this.$router.push({name:'TheHome'})
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        alert("User not found, please register")
+                        this.$router.push({name:'SignUp'})
+                    })
+            },
+                /*
                 let result = await axios.get(`http://0.0.0.0:3000/v1/users?email=${this.email}&password=${this.password}`)
                 console.log(result)
 
-                if(result.status == 201 && result.data.length > 0) {
-                    localStorage.setItem("user-info", JSON.stringify(result.data[0]))
-                    this.$router.push({name:'TheHome'})
-                }
-            }
+                if(result.status == 200 && result.data.length > 0) {
+                    localStorage.setItem("user", JSON.stringify(result.data[0]))
+                    this.$router.push({name:'TheHome'})*/
+                
         },
 
         mounted() {
-            let user = localStorage.getItem('user-info')
+            /*let user = localStorage.getItem('user')
             if(user) {
                 this.$router.push({name:'TheHome'})
-            }
+            }*/
 
             /*const btnAddGarment = document.querySelector('#btn-new')
             const radioContainer = document.querySelector('.radio-container')
