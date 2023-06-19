@@ -28,24 +28,19 @@
 
         data() {
             return {
-                userData: {
-                    email: '', //embisda
-                    password: '' //embisda
-                }
+                email: '', //embisda
+                password: '' //embisda
             }
         },
 
         methods: {
             async login() {
-                /*const data = {
+                const data = {
                     email: this.email,
                     password: this.password,
-                }*/
-                await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, this.userData)
-                    .then(response => {
-                        response.userData,
-                        this.$router.push({name:'TheHome'})
-                    })
+                }
+                await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, this.data)
+                    .then(() => {this.$router.push({name:'TheHome'})})
                     .catch(error => {
                         console.log(error)
                         alert("User not found, please register")
