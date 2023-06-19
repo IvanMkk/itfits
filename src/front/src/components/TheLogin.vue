@@ -18,8 +18,7 @@
 
 <script>
     import TheHeader from './TheHeader.vue'
-    //import axios from 'axios'
-    import { AUTH_REQUEST } from '@/store/actions/auth'
+    import axios from 'axios'
     export default {
         name: 'TheLogin',
 
@@ -35,39 +34,7 @@
         },
 
         methods: {
-            login: function() {
-                const { username, password } = this;
-                this.$store.dispatch(AUTH_REQUEST, { username, password }).then(() => {
-                    this.$router.push("/");
-                });
-            }
-            /*async login() {
-                await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
-                    email: this.email,
-                    password: this.password,
-                })
-                    .then(response => {
-                        if (response.data.accessToken) {
-                            localStorage.setItem('user', JSON.stringify(response.data))
-                        }
-                        return response.data
-                        this.$router.push({name:'TheHome'})
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        alert("User not found, please register")
-                        this.$router.push({name:'SignUp'})
-                    })
-            },*/
-
-            /*login: function () {
-                    let email = this.email 
-                    let password = this.password
-                    this.$store.dispatch('login', { email, password })
-                .then(() => this.$router.push('/'))
-                .catch(err => console.log(err))
-            }*/
-            /*async login() {
+            async login() {
                 const data = {
                     email: this.email,
                     password: this.password,
@@ -79,7 +46,7 @@
                         alert("User not found, please register")
                         this.$router.push({name:'SignUp'})
                     })
-            },*/
+            },
                 /*
                 let result = await axios.get(`http://0.0.0.0:3000/v1/users?email=${this.email}&password=${this.password}`)
                 console.log(result)
