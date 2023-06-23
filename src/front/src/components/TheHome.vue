@@ -1,7 +1,7 @@
 <template>
     <TheHeader />
     <main>
-        <h1>{{email}} page</h1>
+        <h1 v-if="user">{{user.email}} page</h1>
         <!--div v-for="item in it_wardrobe_item" :key="item.id" class="card">
             <div class="data item">
                 <p class="garment-type">{{ item.item_type }}</p>
@@ -36,7 +36,7 @@
 </template>
 <script>
 import TheHeader from './TheHeader.vue'
-//import axios from 'axios'
+import axios from 'axios'
 export default {
     name: 'TheHome',
 
@@ -46,6 +46,7 @@ export default {
 
     data() {
         return {
+            user: null,
             email:'',
             it_wardrobe_item:[],
             it_garment_size_type:[],
@@ -85,6 +86,16 @@ export default {
         this.it_wardrobe_item = result.data
         this.it_garment_size_type = sizeType.data
         this.it_garment_size_type_item = sizes.data*/
+    },
+
+    async created() {
+        const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users`, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+        console.log(response)
+        this.user = response.data
     }
 }
 </script>

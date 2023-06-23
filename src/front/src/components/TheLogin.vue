@@ -36,11 +36,16 @@
         methods: {
             async login() {
                 if(this.email != "" && this.password != "") {
-                    await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
+                    const response = await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
                         email: this.email,
                         password: this.password
                     })
-                    .then(response => {
+
+                    console.log(response)
+                    localStorage.setItem('token', response.data.token)
+                    //this.$router.push({name:'TheHome'})
+
+                    /*.then(response => {
                         console.log(response)
                         console.log(response.data)
                         const user = response.data.find(user => user.email === this.email && user.password === this.password)
@@ -48,17 +53,15 @@
                             console.log(user.email)
                             console.log(user.password)
                             localStorage.setItem("user-info", JSON.stringify(user.data))
-                            //this.$router.push({name:'TheHome'})
+                            
                         } else {
                             console.log('User does not exist')
                         }
-                        //const user = response.data.find(user => user.email === this.email && user.password === this.password)
                     })
                     .catch(error => {
                         console.log(error)
-                        alert("User not found, please register")
-                        //this.$router.push({name:'SignUp'})
-                    })
+                        this.$router.push({name:'SignUp'})
+                    })*/
                 }
             },                
         },

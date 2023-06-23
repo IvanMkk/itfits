@@ -7,5 +7,5 @@ import (
 )
 
 func (a *App) OptionsHandler(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK)
+	ctx.JSON(http.StatusOK, nil)
 }
