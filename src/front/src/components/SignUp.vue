@@ -35,18 +35,31 @@
 
         methods: {
             async signUp() {                
-                let result = await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
+                const response = await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
                     email: this.email,
                     password: this.password
                 })
 
-                alert(result)
-                alert(JSON.stringify(result.data))
-
+                console.log(response)
+                this.$router.push({name:'TheLogin'})
+                //this.$router.push('/login')
+                /*.then(response => {
+                    console.log(response)
+                    console.log(result)
+                    console.log(result.data)
+                    localStorage.setItem("user", JSON.stringify(result.data))
+                    this.$router.push({name:'TheHome'})
+                })
+                .catch(error => {
+                    console.log(error)
+                })*/
+                //alert(result)
+                //alert(JSON.stringify(result.data))
+/*
                 if(result.status === 200) {
                     localStorage.setItem("user", JSON.stringify(result.data))
                     this.$router.push({name:'TheHome'})
-                }
+                }*/
 /*
                 result = axios.get('http://0.0.0.0:3000/v1/users', {
                     email: this.email,
