@@ -1,17 +1,18 @@
 <template>
     <TheHeader />
     <h1>Sign Up</h1>
-    <form class="form">
+    <form class="form" @submit.prevent="signUp">
         <div class="form__group">
             <input type="text" v-model="email" id="email" name="email" class="form__control" placeholder="Email">
             <label for="email" class="form__label none">Email</label>
+            <p v-if="error === true" class="message-error">This user already exist</p>
         </div>
         <div class="form__group">
             <input type="password" v-model="password" id="password" name="password" class="form__control" placeholder="Password">
             <label for="password" class="form__label none">Password</label>
         </div>
-        <!--button @click.prevent="signUp" class="" id="sign-up">Sign Up</button-->
-        <button v-on:click="signUp" class="" id="sign-up">Sign Up</button>
+        <button class="" id="sign-up">Sign Up</button>
+        <p class="message-error">{{ message }}</p>
     </form>
     <a href=""><router-link to="/login">Login</router-link></a>
 </template>
@@ -30,49 +31,30 @@
             return {
                 email: '',
                 password: '',
+                error: false,
+                message: ''
             }
         },
 
         methods: {
             async signUp() {                
-                const response = await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
-                    email: this.email,
-                    password: this.password
-                })
-
-                console.log(response)
-                this.$router.push({name:'TheLogin'})
-                //this.$router.push('/login')
-                /*.then(response => {
-                    console.log(response)
-                    console.log(result)
-                    console.log(result.data)
-                    localStorage.setItem("user", JSON.stringify(result.data))
-                    this.$router.push({name:'TheHome'})
-                })
-                .catch(error => {
-                    console.log(error)
-                })*/
-                //alert(result)
-                //alert(JSON.stringify(result.data))
-/*
-                if(result.status === 200) {
-                    localStorage.setItem("user", JSON.stringify(result.data))
-                    this.$router.push({name:'TheHome'})
-                }*/
-/*
-                result = axios.get('http://0.0.0.0:3000/v1/users', {
-                    email: this.email,
-                    password: this.password
-                })
-
-                if(result.status !== 200) {
-                    console.log(JSON.stringify(result.data))
-                    
-                    return
-                }*/
-
-                //localStorage.setItem("user-info", JSON.stringify(result.data))
+                if(this.email != "" && this.password != "") {
+                    await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
+                        email: this.email,
+                        password: this.password
+                    })
+                    .then(response => {
+                        localStorage.setItem('token', response.data.token)
+                        this.$router.push({name:'TheLogin'})
+                    })
+                    .catch(error => {
+                        if(error.response.status == 400) {
+                            return this.error = true
+                        }
+                    })
+                } else {
+                    return this.message = 'Fill in the email and password'
+                }
             }
         },
 
@@ -82,10 +64,11 @@
             if (user) {
                 this.$router.push('/TheHome');
             }*/
+            /*
             let user = localStorage.getItem('user')
             if(user) {
                 this.$router.push({name:'TheHome'})
-            }
+            }*/
 
             /*const btnAddGarment = document.querySelector('#btn-new')
             const radioContainer = document.querySelector('.radio-container')

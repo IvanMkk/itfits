@@ -35,6 +35,10 @@ p {
   font: normal normal normal 0.75rem/0.875rem 'UbuntuRegular';
   margin-right: 0.875rem;
 }
+.message-error {
+  color: #C70707;
+  margin-bottom: 1.5rem;
+}
 a {
   color: #3392FF;
   text-decoration: none;
