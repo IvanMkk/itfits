@@ -68,10 +68,10 @@
         },
 
         mounted() {
-            let user = localStorage.getItem('user')
+            /*let user = localStorage.getItem('user')
             if(user) {
-                //this.$router.push({name:'TheHome'})
-            }
+                this.$router.push({name:'TheHome'})
+            }*/
         }
     }
 </script>
