@@ -56,7 +56,7 @@ func New() *App {
 		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
 	})
 	app.Methods.POST("/v1/users", app.RegistrationHandler)
-	app.Methods.GET("/v1/users", app.AuthenticationsHandler)
+	app.Methods.POST("/v1/users/auth", app.AuthenticationsHandler)
 	app.Methods.OPTIONS("/v1/users", app.OptionsHandler)
 
 	app.Methods.POST("/v1/item", app.AddItemHandler)

@@ -37,15 +37,17 @@
         methods: {
             async login() {
                 if(this.email != "" && this.password != "") {
-                    const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users?email=${this.email}&password=${this.password}`)
-                    /*const response = await axios.post(`${process.env.VUE_APP_BASE_URL}/users`, {
-                        "data": {
+                    /*const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users?email=${this.email}&password=${this.password}`)*/
+                    const response = await axios.post(`${process.env.VUE_APP_BASE_URL}/users/auth`, {
+                        email: this.email,
+                        password: this.password
+                       /* "data": {
                             email: this.email,
                             password: this.password
-                        }
-                    })*/
+                        }*/
+                    })
                     .then(response => {
-                        if (response.response.status == 200 && response.response.data.length > 0) {
+                        if (response.response.status == 200 /*&& response.response.data.length > 0*/) {
                             localStorage.setItem('token', response.data.token)
                             localStorage.setItem('userInfo', JSON.stringify(response.response.data))
                             this.$router.push({name:'TheHome'})
