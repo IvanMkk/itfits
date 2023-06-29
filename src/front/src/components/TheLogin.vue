@@ -28,8 +28,8 @@
 
         data() {
             return {
-                email: '', //embisda
-                password: '', //embisda
+                email: '',
+                password: '',
                 message: ''
             }
         },
@@ -37,32 +37,23 @@
         methods: {
             async login() {
                 if(this.email != "" && this.password != "") {
-                    /*const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users?email=${this.email}&password=${this.password}`)*/
-                    const response = await axios.post(`${process.env.VUE_APP_BASE_URL}/users/auth`, {
+                    await axios.post(`${process.env.VUE_APP_BASE_URL}/users/auth`, {
                         email: this.email,
                         password: this.password
-                       /* "data": {
-                            email: this.email,
-                            password: this.password
-                        }*/
                     })
                     .then(response => {
-                        if (response.response.status == 200 /*&& response.response.data.length > 0*/) {
-                            localStorage.setItem('token', response.data.token)
-                            localStorage.setItem('userInfo', JSON.stringify(response.response.data))
+                        if (response.status == 200) {
+                            localStorage.setItem('token', response.data.token.auth_token)
+                            localStorage.setItem('user', this.email)
                             this.$router.push({name:'TheHome'})
                         }
-
-                        //console.log(response)
-                        //localStorage.setItem('token', response.data.token)
-                        //this.$router.push({name:'TheHome'})
                     })
                     .catch(error => {
+                        console.log(error)
                         if(error.response.status == 400) {
-                            return this.message = 'Sever received your request but the content was not valid'
+                            return this.message = this.email + ' user does not exist or wrong password'
                         }
                     })
-                    console.log(response)
                 } else {
                     return this.message = 'Fill in the email and password'
                 }
@@ -70,10 +61,11 @@
         },
 
         mounted() {
-            /*let user = localStorage.getItem('user')
-            if(user) {
+            let token = localStorage.getItem('token')
+
+            if(token) {
                 this.$router.push({name:'TheHome'})
-            }*/
+            }
         }
     }
 </script>

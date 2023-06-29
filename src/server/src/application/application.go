@@ -58,6 +58,7 @@ func New() *App {
 	app.Methods.POST("/v1/users", app.RegistrationHandler)
 	app.Methods.POST("/v1/users/auth", app.AuthenticationsHandler)
 	app.Methods.OPTIONS("/v1/users", app.OptionsHandler)
+	app.Methods.OPTIONS("/v1/users/auth", app.OptionsHandler)
 
 	app.Methods.POST("/v1/item", app.AddItemHandler)
 	app.Methods.DELETE("/v1/item/:id", app.DeleteItemHandler)

@@ -36,7 +36,7 @@
 </template>
 <script>
 import TheHeader from './TheHeader.vue'
-import axios from 'axios'
+//import axios from 'axios'
 export default {
     name: 'TheHome',
 
@@ -73,9 +73,9 @@ export default {
     },
 
     async mounted() {
-        let user = localStorage.getItem('user')
+        let token = localStorage.getItem('token')
 
-        if(!user) {
+        if(!token) {
             this.$router.push({name:'SignUp'})
         }
 
@@ -89,13 +89,14 @@ export default {
     },
 
     async created() {
-        const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users`, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('token')
-            }
-        })
-        console.log(response)
-        this.user = response.data
+        /*const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users?email=${this.email}&password=${this.password}`)*/
+        // const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/users`, {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('token')
+        //     }
+        // })
+        // console.log(response)
+        // this.user = response.data
     }
 }
 </script>

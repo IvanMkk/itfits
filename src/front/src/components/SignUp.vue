@@ -59,62 +59,11 @@
         },
 
         mounted() {
-            /*const user = JSON.parse(localStorage.getItem('user'));
-            
-            if (user) {
-                this.$router.push('/TheHome');
-            }*/
-            /*
-            let user = localStorage.getItem('user')
-            if(user) {
+            let token = localStorage.getItem('token')
+
+            if(token) {
                 this.$router.push({name:'TheHome'})
-            }*/
-
-            /*const btnAddGarment = document.querySelector('#btn-new')
-            const radioContainer = document.querySelector('.radio-container')
-            const radioDetails = document.querySelectorAll('.radio-details')*/
-            /*const inputBrand = document.querySelector('#brand')
-            const inputType = document.querySelector('#type')
-            const btnAdd = document.querySelector('#btn-add')
-            const btnCncl = document.querySelector('#btn-cancel')*/
-            /*const divItem = Array.from(document.querySelectorAll('.item p'));
-            const divSizes = Array.from(document.querySelectorAll('.sizes p'));*/
-
-            /*window.addEventListener('DOMContentLoaded', () => {
-                const forms = document.querySelectorAll('.form')
-
-                for (const form of forms) {
-                    const groups = form.querySelectorAll('.form__group')
-
-                    for (const group of groups) {
-                        const control = group.querySelector('.form__control')
-                        const labels = group.querySelector('.form__label')
-
-                        if (control.value.length > 0) {
-                            group.classList.add('form__group--active')
-                            labels.classList.remove('none')
-                        }
-
-                        control.addEventListener('input', () => {
-                            if (control.value.length > 0) {
-                                group.classList.add('form__group--active')
-                                labels.classList.remove('none')
-                            } else {
-                                group.classList.remove('form__group--active')
-                                labels.classList.add('none')
-                            }
-
-                            if (inputBrand.value.length > 0 && inputType.value.length > 0) {
-                                btnAdd.classList.remove('none')
-                                btnCncl.classList.add('button-small')
-                            } else {
-                                btnAdd.classList.add('none')
-                                btnCncl.classList.remove('button-small')
-                            }
-                        })
-                    }
-                }
-            })*/
+            }
         }
     }
 </script>
